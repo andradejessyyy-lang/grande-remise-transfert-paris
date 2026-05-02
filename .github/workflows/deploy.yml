@@ -31,9 +31,9 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build (Next.js static export)
-        # Pas de basePath : le site est servi à la racine du domaine custom
-        # grandremiseparis.chauffeurvtc.pro (cf. public/CNAME).
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /grande-remise-transfert-paris
 
       - name: Add .nojekyll (disables Jekyll on GitHub Pages so /_next/ is served)
         run: touch out/.nojekyll
