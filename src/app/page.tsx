@@ -5,6 +5,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { illustrationByGamme } from "@/components/ui/VehicleIllustration";
 import QuickEstimator from "@/components/booking/QuickEstimator";
+import SocialProof from "@/components/home/SocialProof";
 import { services } from "@/lib/services";
 import { vehicles, destinations, getFare } from "@/lib/vehicles";
 import { paris } from "@/lib/images";
@@ -327,6 +328,13 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <div className="divider-luxe" aria-hidden />
+
+      {/* ─────────────────────────────────────────────────────────
+          SOCIAL PROOF — Témoignages + stats (light section)
+          ───────────────────────────────────────────────────────── */}
+      <SocialProof />
+
       {/* ─────────────────────────────────────────────────────────
           SIMULATEUR — Highlighted dark section with QuickEstimator
           ───────────────────────────────────────────────────────── */}
@@ -353,7 +361,7 @@ export default function HomePage() {
             <div className="lg:sticky lg:top-28">
               <div className="eyebrow-line text-luxe-bright">
                 <span className="text-[11px] uppercase tracking-kicker font-medium">
-                  04 — Simulateur
+                  05 — Simulateur
                 </span>
               </div>
               <h2 className="h-section mt-4 text-paper">
