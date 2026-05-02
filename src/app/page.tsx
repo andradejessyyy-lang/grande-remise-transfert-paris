@@ -182,14 +182,15 @@ export default function HomePage() {
                   className="bg-paper-pure flex flex-col overflow-hidden border border-line-soft group"
                 >
                   {localPhoto ? (
-                    /* Local production photo on subtle showroom gradient */
+                    /* Local production photo. Photos full-scene → object-cover.
+                       (vehicle-bg gardé en backstop pour photos transparentes.) */
                     <div className="relative aspect-card overflow-hidden vehicle-bg">
                       <Image
                         src={localPhoto}
                         alt={v.image.alt}
                         fill
                         sizes="(min-width: 768px) 33vw, 100vw"
-                        className="object-contain p-6 transition-transform duration-700 group-hover:scale-105"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                         quality={85}
                       />
                       <div

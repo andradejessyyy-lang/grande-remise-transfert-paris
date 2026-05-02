@@ -75,7 +75,7 @@ export default function VehiculesPage() {
                       alt={v.image.alt}
                       fill
                       sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-contain p-10"
+                      className="object-cover"
                       quality={88}
                     />
                     <div
