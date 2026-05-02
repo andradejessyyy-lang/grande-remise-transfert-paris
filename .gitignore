@@ -34,3 +34,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Reference/source images dropped at the project root by mistake.
+# Real assets live under public/. These root-level images are working drafts.
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+
+# Pre-cutout backups of vehicle photos — kept locally, no need to ship/track.
+/public/vehicules/originals/

@@ -2,26 +2,237 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ──────────────────────────────────────────────────────────
+   Grande Remise Transfert Paris · Design tokens & base layer
+   Strict 3-color palette: pure white · extra black · gold
+   ────────────────────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 1 — Surfaces */
+  --paper: #ffffff;
+  --paper-pure: #ffffff;
+  --paper-tint: #f8f8f8;
+  /* 2 — Text + dark surfaces */
+  --ink: #000000;
+  --ink-soft: #1f1f1f;
+  --ink-mute: #6b6b6b;
+  /* 3 — Gold */
+  --luxe: #a16207;
+  --luxe-bright: #d4af37;
+  --luxe-line: #e8dcc4;
+  /* Hairlines */
+  --line: rgba(0, 0, 0, 0.85);
+  --line-soft: rgba(0, 0, 0, 0.18);
+  --line-faint: rgba(0, 0, 0, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html,
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  body {
+    font-feature-settings: "ss01", "cv11";
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Type scale ─────────────────────────────────────────── */
+  .h-display {
+    @apply font-serif font-light text-paper;
+    font-size: clamp(56px, 8vw, 120px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+  .h-hero {
+    @apply font-serif font-light;
+    font-size: clamp(48px, 6.5vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .h-section {
+    @apply font-serif font-normal;
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .h-card {
+    @apply font-serif font-medium;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+  }
+  .lede {
+    @apply font-light text-ink-soft;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  .body-copy {
+    @apply text-ink-soft;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .kicker {
+    @apply font-sans font-medium uppercase text-ink-mute;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+  }
+
+  /* Eyebrow with leading rule (gold) ────────────────────── */
+  .eyebrow-line {
+    @apply flex items-center gap-3.5 text-luxe;
+  }
+  .eyebrow-line::before {
+    content: "";
+    flex: 0 0 36px;
+    height: 1px;
+    background: var(--luxe);
+  }
+
+  /* Luxe accent rules ──────────────────────────────────── */
+  .rule-luxe {
+    width: 36px;
+    height: 1px;
+    background: var(--luxe);
+  }
+  .rule-luxe-bright {
+    width: 36px;
+    height: 1px;
+    background: var(--luxe-bright);
+  }
+  /* Section divider (full-width hairline gold, very subtle) */
+  .divider-luxe {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--luxe-line) 30%,
+      var(--luxe-line) 70%,
+      transparent
+    );
+  }
+
+  /* Section paddings ────────────────────────────────────── */
+  .section-x {
+    @apply px-5 md:px-10 lg:px-14;
+  }
+  .section-y {
+    @apply py-20 md:py-28;
+  }
+  .section-y-tight {
+    @apply py-14 md:py-20;
+  }
+
+  /* Stat block (gold left-rule) ─────────────────────────── */
+  .stat {
+    @apply flex flex-col gap-1.5;
+    padding-left: 18px;
+    border-left: 1px solid var(--luxe);
+  }
+  .stat-num {
+    @apply font-serif font-light;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-lbl {
+    @apply uppercase text-ink-mute;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  /* Image overlay scrims (used over hero photos to keep type readable) */
+  .scrim-bottom {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.55) 35%,
+      rgba(0, 0, 0, 0.15) 75%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+  .scrim-full {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.4) 60%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+
+  /* Vehicle photo background — subtle showroom gradient.
+     Used as the parent of the <Image> for vehicle cards. Especially helpful
+     for cutout / clipart photos (transparent PNG) which would otherwise float
+     on flat black. Mimics a luxury showroom: gold ambient up top (lighting),
+     soft ground shadow under the car, smooth vertical fade. */
+  .vehicle-bg {
+    background:
+      /* Ground shadow ellipse — simulates the car's cast shadow */
+      radial-gradient(
+        ellipse 70% 14% at 50% 90%,
+        rgba(0, 0, 0, 0.55),
+        transparent 70%
+      ),
+      /* Subtle gold ambient from above (showroom spotlights) */
+        radial-gradient(
+          ellipse at 50% 0%,
+          rgba(212, 175, 55, 0.1),
+          transparent 55%
+        ),
+      /* Main vertical gradient: lighter at top, darker at bottom */
+        linear-gradient(180deg, #1f1f1f 0%, #0c0c0c 65%, #050505 100%);
+  }
+
+  /* Editorial dark slab — used as fallback when a vehicle photo is missing
+     (the SVG illustration renders inside this). Same gold-tinted dark
+     background, with radial highlights for depth. */
+  .editorial-slab {
+    background:
+      radial-gradient(
+        circle at 25% 20%,
+        rgba(212, 175, 55, 0.18),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 80% 85%,
+        rgba(212, 175, 55, 0.08),
+        transparent 50%
+      ),
+      #000000;
+    color: var(--paper);
+    @apply relative flex flex-col items-center justify-center overflow-hidden;
+  }
+  .editorial-slab > * {
+    position: relative;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  /* Subtle film grain — premium luxury feel on hero overlays */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>");
   }
 }
