@@ -21,10 +21,11 @@ export const paris = {
     src: "/paris/arc-de-triomphe.jpg",
     alt: "L'Arc de Triomphe vu depuis l'avenue des Champs-Élysées",
   },
-  // Champs-Élysées illuminée la nuit, format panoramique.
+  // Photo dédiée pour le hero de la page /services (image fournie par l'agence).
+  // Ancien fichier (Champs-Élysées Wikimedia) archivé dans /paris/originals/
   champsElysees: {
-    src: "/paris/champs-elysees-night.jpg",
-    alt: "Avenue des Champs-Élysées illuminée la nuit",
+    src: "/paris/services-hero.avif",
+    alt: "Visuel hero — page services",
   },
   // Place Vendôme / Opéra elegance
   placeVendome: {
